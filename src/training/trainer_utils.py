@@ -15,14 +15,12 @@ def build_preprocess_function(tokenizer, config):
             inputs,
             max_length=config.model.max_input_length,
             truncation=True,
-            padding="max_length",
         )
 
         labels = tokenizer(
             examples[config.data.summary_column],
             max_length=config.model.max_target_length,
             truncation=True,
-            padding="max_length",
         )
 
         model_inputs["labels"] = labels["input_ids"]

@@ -3,8 +3,8 @@ from datasets import Dataset
 from transformers import (
     T5Tokenizer,
     T5ForConditionalGeneration,
-    Trainer,
-    TrainingArguments,
+    Seq2SeqTrainer,
+    Seq2SeqTrainingArguments,
 )
 
 from src.config import config
@@ -50,7 +50,7 @@ def train():
     compute_metrics = build_compute_metrics(tokenizer)
 
     # Training arguments
-    training_args = TrainingArguments(
+    training_args = Seq2SeqTrainingArguments(
         output_dir=config.paths.model_dir,
         per_device_train_batch_size=config.training.batch_size,
         per_device_eval_batch_size=config.training.batch_size,
@@ -58,25 +58,26 @@ def train():
         learning_rate=config.training.learning_rate,
         weight_decay=config.training.weight_decay,
         warmup_steps=config.training.warmup_steps,
+        fp16=config.training.fp16,
         logging_steps=config.training.logging_steps,
         eval_strategy="epoch",
         save_strategy=config.training.save_strategy,
         load_best_model_at_end=True,
-        metric_for_best_model="rougeL",
-        greater_is_better=True,
+        metric_for_best_model="loss",
+        greater_is_better=False,
         report_to="none",
-        predict_with_generate=True
+        predict_with_generate=False,
+        disable_tqdm=False
     )
 
     # Trainer
-    trainer = Trainer(
+    trainer = Seq2SeqTrainer(
         model=model,
         args=training_args,
         train_dataset=dataset["train"],
         eval_dataset=dataset["test"],
-        tokenizer=tokenizer,
-        data_collator=data_collator,
-        compute_metrics=compute_metrics
+        processing_class=tokenizer,
+        data_collator=data_collator
     )
 
     # Train

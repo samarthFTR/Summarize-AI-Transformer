@@ -19,10 +19,11 @@ class ModelConfig:
 @dataclass
 class TrainingConfig:
     # Training hyperparameters
-    batch_size: int = 8
+    batch_size: int = 16
     num_epochs: int = 3
     learning_rate: float = 5e-5
     weight_decay: float = 0.01
+    fp16: bool = True
 
     # Scheduler / warmup
     warmup_steps: int = 500
