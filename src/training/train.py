@@ -59,12 +59,13 @@ def train():
         weight_decay=config.training.weight_decay,
         warmup_steps=config.training.warmup_steps,
         logging_steps=config.training.logging_steps,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         save_strategy=config.training.save_strategy,
         load_best_model_at_end=True,
         metric_for_best_model="rougeL",
         greater_is_better=True,
-        report_to="none"
+        report_to="none",
+        predict_with_generate=True
     )
 
     # Trainer

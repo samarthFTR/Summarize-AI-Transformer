@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import os
 
 
@@ -65,10 +65,10 @@ class PathConfig:
 # Combined Config
 @dataclass
 class Config:
-    model: ModelConfig = ModelConfig()
-    training: TrainingConfig = TrainingConfig()
-    data: DataConfig = DataConfig()
-    paths: PathConfig = PathConfig()
+    model: ModelConfig = field(default_factory=ModelConfig)
+    training: TrainingConfig = field(default_factory=TrainingConfig)
+    data: DataConfig = field(default_factory=DataConfig)
+    paths: PathConfig = field(default_factory=PathConfig)
 
 
 # Instantiate default config
