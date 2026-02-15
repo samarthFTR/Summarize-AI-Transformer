@@ -1,21 +1,35 @@
-
 # Summarize AI Transformer
 
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.95%2B-009688)
+![Next.js](https://img.shields.io/badge/Next.js-13%2B-black)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Status](https://img.shields.io/badge/status-wip-orange)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
 
-**Summarize AI Transformer** is a comprehensive toolkit for fine-tuning Transformer-based models (defaulting to T5-small) on text summarization tasks. It provides a modular pipeline for data loading, preprocessing, training, and evaluation, leveraging the power of Hugging Face `transformers` and `datasets`.
+**Summarize AI Transformer** is a comprehensive, full-stack toolkit for text summarization. It combines the power of Transformer-based models (defaulting to T5-small) with a robust production-ready architecture.
+
+This project offers a complete pipeline: from data preprocessing and fine-tuning to deployment via a **FastAPI** backend and a modern **Next.js** frontend. A **Streamlit** app is also included for rapid prototyping.
 
 ## 🚀 Key Features
 
-*   **Transformer Architecture**: Built on top of the robust T5 (Text-to-Text Transfer Transformer) architecture.
-*   **Modular Design**: Clean separation of concerns with dedicated modules for configuration, data handling, training, and inference.
-*   **Configurable**: All hyperparameters (learning rate, batch size, model name) are easily adjustable via `src/config.py`.
-*   **Evaluation Metrics**: Integrated ROUGE score calculation for reliable summarization quality assessment.
-*   **Checkpointing**: Automatic model checkpointing during training to ensure progress is saved.
+*   **Transformer Architecture**: Fine-tuned **T5 (Text-to-Text Transfer Transformer)** model optimized for summarization tasks.
+*   **Modular Training Pipeline**: Clean separation of concerns for data loading, training, evaluation, and inference.
+*   **Full-Stack Application**:
+    *   **Backend**: High-performance API built with **FastAPI**.
+    *   **Frontend**: Sleek, monochrome User Interface built with **Next.js 16** and **React 19**.
+    *   **Demo**: Interactive **Streamlit** dashboard for quick testing.
+*   **Configurable**: Centralized configuration management via `src/config.py`.
+*   **Evaluation Metrics**: Integrated **ROUGE** score calculation for reliable quality assessment.
+*   **GPU Acceleration**: Optimized for CUDA-enabled environments for faster training and inference.
+*   **Checkpointing**: Automatic model checkpointing to ensure training progress is saved.
 
 ## 🛠️ Installation
+
+### Prerequisites
+*   Python 3.8+
+*   Node.js 18+ (for frontend)
+
+### 1. Backend Setup (Core + API)
 
 1.  **Clone the repository:**
     ```bash
@@ -23,80 +37,107 @@
     cd Summarize-AI-Transformer
     ```
 
-2.  **Create a virtual environment (recommended):**
+2.  **Create a virtual environment:**
     ```bash
     python -m venv venv
-    # On Windows
+    # On Windows:
     venv\Scripts\activate
-    # On macOS/Linux
+    # On macOS/Linux:
     source venv/bin/activate
     ```
 
-3.  **Install dependencies:**
+3.  **Install Python dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
+### 2. Frontend Setup (Next.js)
+
+1.  **Navigate to the frontend directory:**
+    ```bash
+    cd frontend
+    ```
+
+2.  **Install Node dependencies:**
+    ```bash
+    npm install
+    ```
+
+## 🏃 Usage
+
+You can run the different components of the application independently.
+
+### 1. Training the Model
+To start the fine-tuning process on your data:
+```bash
+python run.py
+```
+*This will preprocess data, train the model, save checkpoints to `models/`, and log metrics.*
+
+### 2. Starting the Backend API
+To serve the trained model via a REST API:
+```bash
+uvicorn api:app --reload
+```
+*   **API Documentation**: `http://localhost:8000/docs`
+*   **Health Check**: `http://localhost:8000/api/health`
+
+### 3. Running the Frontend
+To launch the user interface:
+```bash
+cd frontend
+npm run dev
+```
+*Access the application at `http://localhost:3000`.*
+
+### 4. Running the Streamlit Demo
+For a quick, standalone interface:
+```bash
+streamlit run app.py
+```
+
 ## 📊 Data Preparation
 
-The training pipeline expects a CSV file located at `data/raw/data.csv` with the following columns:
+The training pipeline requires a CSV file at `data/raw/data.csv` with the following columns:
 
 | Column Name | Description |
 | :--- | :--- |
 | `Text` | The full text article or document to be summarized. |
 | `Summary` | The ground truth summary. |
 
-*Note: You can configure the input file path and column names in `src/config.py`.*
-
-## 🏃 Usage
-
-### 1. Configuration
-Adjust training parameters in `src/config.py`. Common settings include:
-*   `max_input_length`: Maximum token length for input text.
-*   `batch_size`: Batch size for training and evaluation.
-*   `num_epochs`: Number of training epochs.
-*   `model_name`: Pre-trained model identifier (e.g., `t5-small`, `t5-base`).
-
-### 2. Training
-To start the fine-tuning process, run the main script:
-
-```bash
-python run.py
-```
-
-This will:
-1.  Load and preprocess the data.
-2.  Fine-tune the model.
-3.  Save checkpoints to `models/`.
-4.  Log training metrics.
+*Note: You can configure input paths and column mapping in `src/config.py`.*
 
 ## 📂 Project Structure
 
 ```plaintext
 Summarize-AI-Transformer/
-├── data/
-│   ├── raw/             # Raw input data (data.csv)
-│   └── processed/       # Processed datasets (optional)
-├── models/              # Saved model checkpoints
+├── api.py               # FastAPI backend entry point
+├── app.py               # Streamlit demo application
+├── run.py               # Main training script entry point
 ├── src/
 │   ├── config.py        # Central configuration file
-│   ├── data/            # Data loading and preprocessing scripts
-│   ├── training/        # Training loop and utilities
-│   │   ├── train.py     # Main training logic
-│   │   └── trainer_utils.py # Helper functions for Trainer
-│   ├── inference/       # Inference scripts (WIP)
-│   └── evaluation/      # Evaluation metrics (WIP)
-├── run.py               # Entry point for the application
-├── requirements.txt     # Python dependencies
-└── README.md            # Project documentation
+│   ├── data/            # Data loading & preprocessing
+│   ├── training/        # Training loop & trainer utilities
+│   ├── inference/       # Inference logic
+│   └── evaluation/      # Metric calculation (ROUGE)
+├── frontend/            # Next.js Frontend Application
+│   ├── src/             # Frontend source code
+│   ├── public/          # Static assets
+│   └── package.json     # Frontend dependencies
+├── models/              # Saved model checkpoints
+├── data/                # Dataset store
+│   └── raw/             # Input CSV files
+└── requirements.txt     # Python backend dependencies
 ```
 
 ## 🚧 Status & Roadmap
 
-*   ✅ **Training Pipeline**: Fully implemented support for T5 fine-tuning.
-*   ✅ **Evaluation**: ROUGE score integration is active during training.
-*   🚧 **Inference**: Scripts for generating summaries from trained models are currently under development (`src/inference/`).
-*   🚧 **Evaluation Script**: Standalone evaluation script is planned (`src/evaluation/`).
+*   ✅ **Training Pipeline**: Fully functional T5 fine-tuning.
+*   ✅ **Backend API**: FastAPI integration complete.
+*   ✅ **Frontend**: Modern Next.js UI implemented.
+*   ✅ **Demo App**: Streamlit dashboard available.
+*   🚧 **Advanced Metrics**: Additional evaluation metrics planned.
+*   🚧 **Deployment**: Docker support coming soon.
 
 ## 🤝 Contributing
 
