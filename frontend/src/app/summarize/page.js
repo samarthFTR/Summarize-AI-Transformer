@@ -1,7 +1,10 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import styles from "./page.module.css";
+
+const Dither = dynamic(() => import("../components/Dither/Dither"), { ssr: false });
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -105,6 +108,20 @@ export default function SummarizePage() {
 
     return (
         <div className={styles.page}>
+            {/* Dither WebGL Background */}
+            <div className={styles.ditherBg}>
+                <Dither
+                    waveColor={[0.32, 0.15, 1]}
+                    disableAnimation={false}
+                    enableMouseInteraction
+                    mouseRadius={1}
+                    colorNum={4}
+                    pixelSize={2}
+                    waveAmplitude={0.3}
+                    waveFrequency={3}
+                    waveSpeed={0.05}
+                />
+            </div>
             {/* Header */}
             <header className={styles.header}>
                 <Link href="/" className={styles.logo}>
@@ -117,10 +134,10 @@ export default function SummarizePage() {
                 <div className={styles.headerRight}>
                     <div
                         className={`${styles.statusBadge} ${apiStatus === "online"
-                                ? styles.online
-                                : apiStatus === "offline"
-                                    ? styles.offline
-                                    : styles.checking
+                            ? styles.online
+                            : apiStatus === "offline"
+                                ? styles.offline
+                                : styles.checking
                             }`}
                     >
                         <span className={styles.statusDot}></span>

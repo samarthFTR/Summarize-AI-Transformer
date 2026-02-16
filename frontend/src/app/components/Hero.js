@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import DarkVeil from "./DarkVeil/DarkVeil";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -22,14 +23,18 @@ export default function Hero() {
 
     return (
         <section className={styles.hero} ref={heroRef}>
-            {/* Animated Background Blobs */}
-            <div className={styles.blobContainer}>
-                <div className={`${styles.blob} ${styles.blob1}`}></div>
-                <div className={`${styles.blob} ${styles.blob2}`}></div>
+            {/* DarkVeil WebGL Background */}
+            <div className={styles.darkVeilBg}>
+                <DarkVeil
+                    hueShift={0}
+                    noiseIntensity={0}
+                    scanlineIntensity={0}
+                    speed={0.5}
+                    scanlineFrequency={0}
+                    warpAmount={0}
+                    resolutionScale={1}
+                />
             </div>
-
-            {/* Grid overlay */}
-            <div className={styles.gridOverlay}></div>
 
             <div className={styles.content}>
                 <div className={styles.badge}>
@@ -76,32 +81,6 @@ export default function Hero() {
                         <span className={styles.statValue}>ROUGE</span>
                         <span className={styles.statLabel}>Evaluated Quality</span>
                     </div>
-                </div>
-            </div>
-
-            {/* Floating Code Preview */}
-            <div className={styles.codePreview}>
-                <div className={styles.codeWindow}>
-                    <div className={styles.codeHeader}>
-                        <div className={styles.codeDots}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <span className={styles.codeTitle}>predict.py</span>
-                    </div>
-                    <pre className={styles.codeBody}>
-                        <code>
-                            <span className={styles.codeKeyword}>from</span> transformers <span className={styles.codeKeyword}>import</span> T5Tokenizer{"\n"}
-                            <span className={styles.codeKeyword}>from</span> transformers <span className={styles.codeKeyword}>import</span> T5ForConditionalGeneration{"\n\n"}
-                            <span className={styles.codeComment}>{"# Load fine-tuned model"}</span>{"\n"}
-                            tokenizer = T5Tokenizer.<span className={styles.codeFunc}>from_pretrained</span>(<span className={styles.codeString}>&quot;models/t5-small&quot;</span>){"\n"}
-                            model = T5ForConditionalGeneration.<span className={styles.codeFunc}>from_pretrained</span>(<span className={styles.codeString}>&quot;models/t5-small&quot;</span>){"\n\n"}
-                            <span className={styles.codeComment}>{"# Generate summary"}</span>{"\n"}
-                            summary = model.<span className={styles.codeFunc}>generate</span>(input_ids, num_beams=<span className={styles.codeNum}>4</span>){"\n"}
-                            <span className={styles.codeKeyword}>print</span>(tokenizer.<span className={styles.codeFunc}>decode</span>(summary[<span className={styles.codeNum}>0</span>]))
-                        </code>
-                    </pre>
                 </div>
             </div>
         </section>
