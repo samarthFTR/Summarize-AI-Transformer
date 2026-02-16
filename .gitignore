@@ -1,9 +1,15 @@
 *.csv
-models/
 *.pyc
 __pycache__/
 
-# Frontend
-frontend/node_modules/
-frontend/.next/
-frontend/out/
+# Summarization
+summarization/models/
+
+# Text Generator
+text_generator/models/
+text_generator/data/
+
+# General
+node_modules/
+.next/
+out/

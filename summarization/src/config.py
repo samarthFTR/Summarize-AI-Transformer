@@ -1,6 +1,9 @@
 from dataclasses import dataclass, field
 import os
 
+# Base directory for the summarization project
+_SUMMARIZATION_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 @dataclass
 class ModelConfig:
@@ -39,8 +42,8 @@ class TrainingConfig:
 @dataclass
 class DataConfig:
     # Data paths
-    raw_data_path: str = os.path.join("data", "raw", "data.csv")
-    processed_data_path: str = os.path.join("data", "processed")
+    raw_data_path: str = os.path.join(_SUMMARIZATION_DIR, "data", "raw", "data.csv")
+    processed_data_path: str = os.path.join(_SUMMARIZATION_DIR, "data", "processed")
 
     # Column names in CSV
     text_column: str = "Text"
@@ -53,10 +56,10 @@ class DataConfig:
 @dataclass
 class PathConfig:
     # Model saving directory
-    model_dir: str = os.path.join("models", "t5-small")
+    model_dir: str = os.path.join(_SUMMARIZATION_DIR, "models", "t5-small")
 
     # Logging directory
-    log_dir: str = os.path.join("logs")
+    log_dir: str = os.path.join(_SUMMARIZATION_DIR, "logs")
 
     def create_dirs(self):
         os.makedirs(self.model_dir, exist_ok=True)
