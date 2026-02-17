@@ -5,7 +5,7 @@ const layers = [
     {
         label: "Frontend",
         tech: "Next.js",
-        items: ["Landing Page", "Summarizer UI", "Real-time Results"],
+        items: ["Landing Page", "Summarizer UI", "Generator UI", "Real-time Results"],
         icon: (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -17,7 +17,7 @@ const layers = [
     {
         label: "API Layer",
         tech: "FastAPI",
-        items: ["/api/summarize", "/api/health", "CORS Middleware"],
+        items: ["/api/summarize", "/api/generate", "/api/health", "CORS Middleware"],
         icon: (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
@@ -27,7 +27,7 @@ const layers = [
     {
         label: "ML Engine",
         tech: "HuggingFace",
-        items: ["T5Tokenizer", "T5ForConditionalGeneration", "Beam Search"],
+        items: ["T5Tokenizer", "T5ForConditionalGeneration", "GPT2LMHeadModel", "Beam Search"],
         icon: (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2a4 4 0 0 1 4 4v1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2V6a4 4 0 0 1 4-4z" />
@@ -38,7 +38,7 @@ const layers = [
     {
         label: "Training",
         tech: "PyTorch",
-        items: ["Seq2SeqTrainer", "ROUGE Evaluation", "Model Checkpoints"],
+        items: ["Seq2SeqTrainer", "GPT-2 Fine-Tuning", "ROUGE Evaluation", "Model Checkpoints"],
         icon: (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -56,6 +56,7 @@ const techStack = [
     { name: "FastAPI", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg> },
     { name: "Next.js", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 15V9l7.745 10.65A9 9 0 1 1 19 17.657" /><path d="M15 2.4A9 9 0 0 1 21 12h-6" /></svg> },
     { name: "T5-Small", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2V6a4 4 0 0 1 4-4z" /><path d="M9 14v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4" /></svg> },
+    { name: "GPT-2", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg> },
 ];
 
 export default function Architecture() {

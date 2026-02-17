@@ -39,18 +39,18 @@ export default function Hero() {
             <div className={styles.content}>
                 <div className={styles.badge}>
                     <span className={styles.badgeDot}></span>
-                    Powered by T5 Transformer
+                    Powered by T5 & GPT-2 Transformers
                 </div>
 
                 <h1 className={styles.title}>
-                    Transform Text Into
+                    Summarize & Generate
                     <br />
-                    <span className={styles.titleGradient}>Intelligent Summaries</span>
+                    <span className={styles.titleGradient}>Text with AI</span>
                 </h1>
 
                 <p className={styles.subtitle}>
-                    Harness the power of a fine-tuned T5 Transformer model to distill
-                    lengthy documents into clear, concise summaries — instantly.
+                    Distill lengthy documents into concise summaries with T5, or expand
+                    brief ideas into full articles with fine-tuned GPT-2 — all in one platform.
                 </p>
 
                 <div className={styles.actions}>
@@ -60,8 +60,11 @@ export default function Hero() {
                             <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </Link>
-                    <Link href="/#how-it-works" className={styles.secondaryBtn}>
-                        <span>See How It Works</span>
+                    <Link href="/generate" className={styles.secondaryBtn}>
+                        <span>Start Generating</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                     </Link>
                 </div>
 
@@ -69,17 +72,17 @@ export default function Hero() {
                 <div className={styles.stats}>
                     <div className={styles.stat}>
                         <span className={styles.statValue}>T5‑Small</span>
-                        <span className={styles.statLabel}>Model Architecture</span>
+                        <span className={styles.statLabel}>Summarization</span>
                     </div>
                     <div className={styles.statDivider}></div>
                     <div className={styles.stat}>
-                        <span className={styles.statValue}>60M+</span>
-                        <span className={styles.statLabel}>Parameters</span>
+                        <span className={styles.statValue}>GPT‑2</span>
+                        <span className={styles.statLabel}>Text Generation</span>
                     </div>
                     <div className={styles.statDivider}></div>
                     <div className={styles.stat}>
-                        <span className={styles.statValue}>ROUGE</span>
-                        <span className={styles.statLabel}>Evaluated Quality</span>
+                        <span className={styles.statValue}>184M+</span>
+                        <span className={styles.statLabel}>Total Parameters</span>
                     </div>
                 </div>
             </div>

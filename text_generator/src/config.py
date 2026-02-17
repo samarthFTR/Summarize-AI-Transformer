@@ -16,13 +16,14 @@ class ModelConfig:
     max_length: int = 512          # Combined (prompt + generation) max tokens
 
     # Generation settings
-    max_gen_length: int = 300      # Max tokens to generate
-    temperature: float = 0.8
-    top_k: int = 50
-    top_p: float = 0.95
+    max_gen_length: int = 200      # Max tokens to generate
+    temperature: float = 0.7       # Lower = more focused, less random
+    top_k: int = 40                # Restrict to top 40 probable tokens
+    top_p: float = 0.90            # Nucleus sampling — tighter probability mass
     num_beams: int = 1             # 1 = greedy/sampling, >1 = beam search
     do_sample: bool = True
-    repetition_penalty: float = 1.2
+    repetition_penalty: float = 1.4  # Stronger penalty for repeated tokens
+    no_repeat_ngram_size: int = 3    # Prevent any 3-gram from repeating
 
 
 @dataclass
@@ -30,7 +31,7 @@ class TrainingConfig:
     # Training hyperparameters
     batch_size: int = 4
     gradient_accumulation_steps: int = 4   # Effective batch = 16
-    num_epochs: int = 3
+    num_epochs: int = 5
     learning_rate: float = 5e-5
     weight_decay: float = 0.01
     fp16: bool = True
@@ -58,8 +59,8 @@ class DataConfig:
     input_column: str = "Summary"    # This becomes the prompt
     target_column: str = "Text"      # This is what the model learns to generate
 
-    # Dataset limit
-    max_samples: int = 5000
+    # Dataset limit (set higher since many will be filtered out for length)
+    max_samples: int = 10000
 
     # Special tokens
     separator: str = " <|sep|> "

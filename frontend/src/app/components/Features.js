@@ -37,14 +37,13 @@ const features = [
         ),
     },
     {
-        title: "Fine-Tuned Precision",
+        title: "GPT-2 Text Generation",
         description:
-            "Custom fine-tuned on the Amazon Fine Food Reviews dataset for domain-specific accuracy and fluency.",
+            "Expand brief summaries into full-length articles using a fine-tuned GPT-2 model with nucleus sampling.",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="6" />
-                <circle cx="12" cy="12" r="2" />
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
             </svg>
         ),
     },
@@ -85,8 +84,8 @@ export default function Features() {
                         <span className={styles.titleAccent}>Intelligent Summarization</span>
                     </h2>
                     <p className={styles.subtitle}>
-                        A complete ML pipeline from training to deployment, powered by
-                        state-of-the-art Transformer architecture.
+                        A complete ML pipeline with dual models — summarization and generation — powered by
+                        state-of-the-art Transformer architectures.
                     </p>
                 </div>
 

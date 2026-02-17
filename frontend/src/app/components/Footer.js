@@ -21,6 +21,7 @@ export default function Footer() {
                     <div className={styles.linksGroup}>
                         <h4 className={styles.linksTitle}>Product</h4>
                         <Link href="/summarize" className={styles.footerLink}>Summarizer</Link>
+                        <Link href="/generate" className={styles.footerLink}>Generator</Link>
                         <Link href="/#features" className={styles.footerLink}>Features</Link>
                         <Link href="/#how-it-works" className={styles.footerLink}>How It Works</Link>
                     </div>
@@ -28,6 +29,7 @@ export default function Footer() {
                     <div className={styles.linksGroup}>
                         <h4 className={styles.linksTitle}>Stack</h4>
                         <span className={styles.footerLink}>T5 Transformer</span>
+                        <span className={styles.footerLink}>GPT-2</span>
                         <span className={styles.footerLink}>FastAPI</span>
                         <span className={styles.footerLink}>Next.js</span>
                     </div>
@@ -47,7 +49,7 @@ export default function Footer() {
                         &copy; {new Date().getFullYear()} Summarize AI. All rights reserved.
                     </p>
                     <p className={styles.tech}>
-                        T5-Small &middot; PyTorch &middot; HuggingFace
+                        T5-Small &middot; GPT-2 &middot; PyTorch &middot; HuggingFace
                     </p>
                 </div>
             </div>

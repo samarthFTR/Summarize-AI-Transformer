@@ -1,10 +1,10 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Summarize AI — Intelligent Text Summarization",
+  title: "Summarize AI — Intelligent Summarization & Text Generation",
   description:
-    "Transform lengthy text into concise, meaningful summaries using a fine-tuned T5 Transformer model. Powered by state-of-the-art NLP.",
-  keywords: ["AI", "Summarization", "Transformer", "T5", "NLP", "Machine Learning"],
+    "Summarize text with T5 and generate full articles from summaries with GPT-2. Dual Transformer AI models for complete text intelligence.",
+  keywords: ["AI", "Summarization", "Text Generation", "Transformer", "T5", "GPT-2", "NLP", "Machine Learning"],
   authors: [{ name: "Summarize AI Team" }],
 };
 

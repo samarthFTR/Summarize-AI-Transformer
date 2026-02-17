@@ -13,6 +13,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 sys.path.append(project_root)
 
 import torch
+import re
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from src.config import config
 
@@ -44,6 +45,7 @@ def generate_text(
     num_beams=None,
     do_sample=None,
     repetition_penalty=None,
+    no_repeat_ngram_size=None,
 ):
     """
     Generate expanded text from a given summary.
@@ -71,6 +73,7 @@ def generate_text(
     num_beams = num_beams or config.model.num_beams
     do_sample = do_sample if do_sample is not None else config.model.do_sample
     repetition_penalty = repetition_penalty or config.model.repetition_penalty
+    no_repeat_ngram_size = no_repeat_ngram_size or config.model.no_repeat_ngram_size
 
     # Build the prompt (same format as training)
     prompt = config.data.prompt_prefix + summary + config.data.separator
@@ -93,6 +96,7 @@ def generate_text(
             num_beams=num_beams,
             do_sample=do_sample,
             repetition_penalty=repetition_penalty,
+            no_repeat_ngram_size=no_repeat_ngram_size,
             pad_token_id=tokenizer.eos_token_id,
             eos_token_id=tokenizer.eos_token_id,
         )
@@ -104,7 +108,36 @@ def generate_text(
     # Clean up separator artifacts if any
     generated_text = generated_text.replace("<|sep|>", "").strip()
 
+    # Post-process: remove non-English / garbage characters
+    generated_text = _clean_generated_text(generated_text)
+
     return generated_text
+
+
+def _clean_generated_text(text):
+    """Remove non-English characters and clean up garbled output."""
+    # Keep only ASCII printable characters + common punctuation
+    # This strips Chinese, Arabic, Cyrillic, and other non-Latin scripts
+    text = re.sub(r'[^\x20-\x7E\n]', '', text)
+
+    # Remove lines that are mostly empty after cleaning
+    lines = text.split('\n')
+    clean_lines = []
+    for line in lines:
+        stripped = line.strip()
+        # Keep lines that have at least some meaningful content
+        if stripped and len(stripped) > 2:
+            clean_lines.append(stripped)
+
+    text = ' '.join(clean_lines)
+
+    # Collapse multiple spaces
+    text = re.sub(r'\s{2,}', ' ', text)
+
+    # Remove orphaned punctuation
+    text = re.sub(r'\s([.,;:!?])', r'\1', text)
+
+    return text.strip()
 
 
 if __name__ == "__main__":
