@@ -4,6 +4,9 @@ import os
 # Base directory for the summarization project
 _SUMMARIZATION_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# HuggingFace Hub repo ID (used in production / Docker)
+_HF_REPO_ID = "samarthftr/summarizer"
+
 
 @dataclass
 class ModelConfig:
@@ -55,8 +58,15 @@ class DataConfig:
 
 @dataclass
 class PathConfig:
-    # Model saving directory
-    model_dir: str = os.path.join(_SUMMARIZATION_DIR, "models", "t5-small")
+    # Model source: use HuggingFace Hub in production, local path for development
+    # Set HF_MODEL_REPO env var to load from HuggingFace Hub
+    model_dir: str = os.environ.get(
+        "HF_MODEL_REPO",
+        os.path.join(_SUMMARIZATION_DIR, "models", "t5-small")
+    )
+
+    # HuggingFace Hub repo ID (for reference / upload scripts)
+    hf_repo_id: str = _HF_REPO_ID
 
     # Logging directory
     log_dir: str = os.path.join(_SUMMARIZATION_DIR, "logs")

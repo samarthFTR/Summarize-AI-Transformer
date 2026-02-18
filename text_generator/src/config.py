@@ -6,6 +6,9 @@ _TEXT_GEN_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Root project directory (parent of text_generator/)
 _PROJECT_ROOT = os.path.dirname(_TEXT_GEN_DIR)
 
+# HuggingFace Hub repo ID (used in production / Docker)
+_HF_REPO_ID = "samarthftr/Text-generator"
+
 
 @dataclass
 class ModelConfig:
@@ -69,8 +72,15 @@ class DataConfig:
 
 @dataclass
 class PathConfig:
-    # Model saving directory
-    model_dir: str = os.path.join(_TEXT_GEN_DIR, "models", "gpt2-finetuned")
+    # Model source: use HuggingFace Hub in production, local path for development
+    # Set HF_MODEL_REPO env var to load from HuggingFace Hub
+    model_dir: str = os.environ.get(
+        "HF_MODEL_REPO",
+        os.path.join(_TEXT_GEN_DIR, "models", "gpt2-finetuned")
+    )
+
+    # HuggingFace Hub repo ID (for reference / upload scripts)
+    hf_repo_id: str = _HF_REPO_ID
 
     # Logging directory
     log_dir: str = os.path.join(_TEXT_GEN_DIR, "logs")

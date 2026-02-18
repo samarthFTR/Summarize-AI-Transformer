@@ -13,3 +13,11 @@ text_generator/data/
 node_modules/
 .next/
 out/
+
+# Environment files (keep .env.example tracked)
+.env
+.env.local
+.env*.local
+
+# Cloned HuggingFace Space (not part of project)
+summarize/

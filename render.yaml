@@ -1,0 +1,38 @@
+# =====================================================
+# Render Blueprint — Summarize AI Transformer
+# Deploy both Python APIs as Web Services on Render
+# Models are loaded from HuggingFace Hub
+# https://render.com/docs/blueprint-spec
+# =====================================================
+
+services:
+
+  # ---- Summarization API (T5) ----
+  - type: web
+    name: summarize-ai-summarization
+    runtime: docker
+    dockerfilePath: ./summarization/Dockerfile
+    dockerContext: ./summarization
+    region: oregon
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HF_MODEL_REPO
+        value: "samarthftr/summarizer"
+
+  # ---- Text Generator API (GPT-2) ----
+  - type: web
+    name: summarize-ai-generator
+    runtime: docker
+    dockerfilePath: ./text_generator/Dockerfile
+    dockerContext: ./text_generator
+    region: oregon
+    plan: starter
+    healthCheckPath: /api/generate/health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HF_MODEL_REPO
+        value: "samarthftr/Text-generator"
