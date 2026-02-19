@@ -1,4 +1,4 @@
-# Summarize AI Transformer
+# GenSumm-AI Transformer
 
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.95%2B-009688)
@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 
-**Summarize AI Transformer** is a comprehensive, full-stack AI toolkit featuring two Transformer-based models — **T5-small** for text summarization and **GPT-2** for text generation. It provides a complete pipeline from training to production deployment.
+**GenSumm-AI Transformer** is a comprehensive, full-stack AI toolkit featuring two Transformer-based models — **T5-small** for text summarization and **GPT-2** for text generation. It provides a complete pipeline from training to production deployment.
 
 This project offers: data preprocessing, fine-tuning, inference via **FastAPI** backends, a modern **Next.js** frontend, and full **Docker** containerization with deployment support for **Render** and **Vercel**.
 

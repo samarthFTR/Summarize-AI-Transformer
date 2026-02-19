@@ -11,7 +11,7 @@ export default function Footer() {
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }}>
                                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                             </svg>
-                            Summarize<span className={styles.logoAccent}>AI</span>
+                            GenSumm-<span className={styles.logoAccent}>AI</span>
                         </span>
                         <p className={styles.brandDesc}>
                             Intelligent text summarization powered by fine-tuned Transformer models.
@@ -46,7 +46,7 @@ export default function Footer() {
 
                 <div className={styles.bottom}>
                     <p className={styles.copyright}>
-                        &copy; {new Date().getFullYear()} Summarize AI. All rights reserved.
+                        &copy; {new Date().getFullYear()} GenSumm-AI. All rights reserved.
                     </p>
                     <p className={styles.tech}>
                         T5-Small &middot; GPT-2 &middot; PyTorch &middot; HuggingFace
