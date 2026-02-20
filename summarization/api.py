@@ -41,8 +41,11 @@ def load_model():
     """Load the model once at startup."""
     global tokenizer, model
     try:
-        tokenizer = T5Tokenizer.from_pretrained(config.paths.model_dir)
-        model = T5ForConditionalGeneration.from_pretrained(config.paths.model_dir)
+        # Check if we should force offline mode (e.g. in production with baked models)
+        offline_mode = os.environ.get("HF_HUB_OFFLINE") == "1"
+        
+        tokenizer = T5Tokenizer.from_pretrained(config.paths.model_dir, local_files_only=offline_mode)
+        model = T5ForConditionalGeneration.from_pretrained(config.paths.model_dir, local_files_only=offline_mode)
         print("✅ Model loaded successfully.")
     except Exception as e:
         print(f"❌ Failed to load model: {e}")

@@ -14,10 +14,8 @@ node_modules/
 .next/
 out/
 
-# Environment files (keep .env.example tracked)
+# Environment files
 .env
 .env.local
 .env*.local
 
-# Cloned HuggingFace Space (not part of project)
-summarize/

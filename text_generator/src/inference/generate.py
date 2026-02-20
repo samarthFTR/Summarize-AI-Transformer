@@ -23,8 +23,12 @@ def load_model(model_dir=None):
     model_dir = model_dir or config.paths.model_dir
 
     print(f"Loading model from: {model_dir}")
-    tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
-    model = GPT2LMHeadModel.from_pretrained(model_dir)
+    
+    # Check if we should force offline mode (e.g. in production with baked models)
+    offline_mode = os.environ.get("HF_HUB_OFFLINE") == "1"
+    
+    tokenizer = GPT2Tokenizer.from_pretrained(model_dir, local_files_only=offline_mode)
+    model = GPT2LMHeadModel.from_pretrained(model_dir, local_files_only=offline_mode)
 
     # Ensure pad token is set
     if tokenizer.pad_token is None:
