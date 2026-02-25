@@ -99,12 +99,14 @@ def summarize(request: SummarizeRequest):
             truncation=True,
         )
 
-        summary_ids = model.generate(
-            input_ids,
-            max_length=request.max_length,
-            num_beams=request.num_beams,
-            early_stopping=config.model.early_stopping,
-        )
+        import torch
+        with torch.no_grad():
+            summary_ids = model.generate(
+                input_ids,
+                max_length=request.max_length,
+                num_beams=request.num_beams,
+                early_stopping=config.model.early_stopping,
+            )
 
         summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
         processing_time = round(time.time() - start_time, 3)
